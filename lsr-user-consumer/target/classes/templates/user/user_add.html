@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>用户新增</title>
+<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/materialdesignicons.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/animate.css}" rel="stylesheet">
+<link th:href="@{/static/css/style.min.css}" rel="stylesheet">
+<link th:href="@{/static/layer/theme/default/layer.css}" rel="stylesheet">
+<link th:href="@{/static/js/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="card">
+  <div class="card-body">
+    <form class="form-horizontal"  id="userfrom" onsubmit="return false;" >
+      <div class="form-group">
+        <label class="col-xs-3 control-label" style="text-align:center; padding-top: 8px">邮箱</label>
+        <div class="col-xs-9">
+          <input class="form-control"  id="email" name="email" placeholder="请输入邮箱..">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label" style="text-align:center; padding-top: 8px" >昵称</label>
+        <div class="col-xs-9">
+          <input class="form-control"  id="usernick" name="usernick" placeholder="请输入昵称..">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label" style="text-align:center; padding-top: 8px">账号</label>
+        <div class="col-xs-9">
+          <input class="form-control"  id="username" name="username" placeholder="请输入账号..">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-xs-3 control-label" style="text-align:center; padding-top: 8px" >密码</label>
+        <div class="col-xs-9">
+          <input class="form-control"  id="password" name="password" placeholder="请输入密码..">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 col-md-offset-3">
+          <button class="btn btn-sm btn-primary" style="text-align:center;" onclick="save()">确定</button>
+        </div>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<!--行内编辑插件-->
+<script type="text/javascript" th:src="@{/static/js/main.min.js}"></script>
+<script type="text/javascript">
+  function save() {
+    var obj = $('#userfrom').serialize();
+    var jsonData = JSON.stringify(obj);
+    $.ajax({
+      url:"/add/user",
+      type:"post",
+      data:jsonData,
+      dataType:"json",
+      success:function(data){
+        if(data.status==200){
+          layer.msg(data.message,{icon: 1});
+        }else{
+          layer.msg(data.message,{icon: 2});
+        }
+        layer.closeAll();//关闭弹窗
+      },
+      error:function (e) {
+
+      }
+    })
+  }
+</script>
+</body>
+</html>
