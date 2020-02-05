@@ -1,0 +1,86 @@
+# 服务端口号
+server:
+  port: 8001
+# 数据库地址
+datasource:
+  url: 106.54.114.230:3306/lsr-microservice
+spring:
+  application:
+    name: lsr-order-provider # 对外暴露的服务名称
+  cloud:
+    consul:
+      host: 106.54.114.230
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+        prefer-ip-address: true
+  datasource: # 数据库配置
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${datasource.url}?useSSL=false&useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+    username: root
+    password: lishirui
+    type : com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size : 20
+      min-idle : 1
+      max-active : 500
+      max-wait : 60000
+      time-between-eviction-runs-millis : 60000
+      #      min-evictable-idle-time-millis : 300000
+      #      max-evictable-idle-time-millis : 300000
+      validation-query : SELECT 1
+      validation-query-timeout : 30000
+      test-while-idle : true
+      test-on-borrow : false
+      test-on-return : false
+      pool-prepared-statements : false
+      max-pool-prepared-statement-per-connection-size : 20
+      max-open-prepared-statements : 20
+      filters : stat,slf4j
+      filter:
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
+#mybatis配置
+mybatis:
+  #配置mapper地址
+  mapper-locations: classpath:mapper/*.xml
+  #配置实体bean地址
+  type-aliases-package: cn.lsr.entity
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名规范
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    #打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    
+#mybatis 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+
+#通用mapper配置
+mapper:
+  #公用接口类路径
+  mappers: cn.lsr.user.config.mapper.MyMapper
+  identity: MYSQL
+
+# 线程池配置
+thread:
+  enable: true
+  corePoolSize: 10
+  maximumPoolSize: 30
+  keepAliveTime: 2000
+
+
+# swagger配置   访问 http://127.0.0.1:8001/swagger-ui.html
+swagger:
+  enable: true
+  controller: cn.lsr.controller
+  title: Terry Api 测试
+  description: 开始测试吧........
+  version: 9.2
+  license: 博客
+  licenseUrl: https://www.cnblogs.com/hacker-lsr/
