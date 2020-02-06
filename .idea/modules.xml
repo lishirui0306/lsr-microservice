@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/lsr-common/lsr-common.iml" filepath="$PROJECT_DIR$/lsr-common/lsr-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lsr-microservice.iml" filepath="$PROJECT_DIR$/lsr-microservice.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lsr-order-provider/lsr-order-provider.iml" filepath="$PROJECT_DIR$/lsr-order-provider/lsr-order-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lsr-redis-lock/lsr-redis-lock.iml" filepath="$PROJECT_DIR$/lsr-redis-lock/lsr-redis-lock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lsr-user-consumer/lsr-user-consumer.iml" filepath="$PROJECT_DIR$/lsr-user-consumer/lsr-user-consumer.iml" />
+    </modules>
+  </component>
+</project>

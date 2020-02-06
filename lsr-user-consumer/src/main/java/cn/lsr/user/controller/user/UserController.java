@@ -100,10 +100,6 @@ public class UserController {
         return  new PageUtils(list,page.getTotal());
     }
 
-    public static void main(String[] args) {
-        System.out.println(System.currentTimeMillis());
-    }
-
     /**
      * 功能描述: <br>
      * 〈〉open 新增页面
