@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="57215a4a-8f94-4892-b571-9a9df53bd5d4" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lsr-user-consumer/src/main/java/cn/lsr/user/controller/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/lsr-user-consumer/src/main/java/cn/lsr/user/controller/user/UserController.java" afterDir="false" />
-    </list>
+    <list default="true" id="57215a4a-8f94-4892-b571-9a9df53bd5d4" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -32,6 +30,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RunManager" selected="Spring Boot.RedisServiceApplication">
@@ -67,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1580918719667</updated>
-      <workItem from="1580918724218" duration="1106000" />
+      <workItem from="1580918724218" duration="2722000" />
     </task>
     <servers />
   </component>
@@ -75,9 +79,9 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="428" y="315" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580952968818">
+    <state x="428" y="315" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580963425939">
       <screen x="0" y="23" width="1280" height="746" />
     </state>
-    <state x="428" y="315" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.746@0.23.1280.746" timestamp="1580952968818" />
+    <state x="428" y="315" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1280.746@0.23.1280.746" timestamp="1580963425939" />
   </component>
 </project>
