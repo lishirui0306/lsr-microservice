@@ -82,19 +82,19 @@ public class UserController {
         int pageSize = Integer.parseInt(params.get("limit").toString());
         //获取consul 上的服务
         List<ServiceInstance> redislock = discoveryClient.getInstances("lsr-redis-lock");
-        String servername = null;
+        String servername;
         if (redislock != null && redislock.size()>0) {
             servername = redislock.get(0).getUri().toString();
             System.out.println("获取到的服务地址："+servername);
+            String s = System.currentTimeMillis()+"";
+            ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/getRedisLock", "3", s), RedisResult.class);
+            if (entity.getBody().getStatus()==200){
+                System.out.println("============开始业务逻辑");
+            }else{
+                throw new RuntimeException(entity.getBody().getMessages());
+            }
+            ResponseEntity<RedisResult> out =restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/unRedisLock","3",s),RedisResult.class);
         }
-        String s = System.currentTimeMillis()+"";
-        ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/getRedisLock", "3", s), RedisResult.class);
-        if (entity.getBody().getStatus()==200){
-            System.out.println("============开始业务逻辑");
-        }else{
-            throw new RuntimeException(entity.getBody().getMessages());
-        }
-        ResponseEntity<RedisResult> out =restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/unRedisLock","3",s),RedisResult.class);
         Page page = PageHelper.startPage(pageBNum,pageSize);
         List<User> list = userMapper.selectAll();
         return  new PageUtils(list,page.getTotal());

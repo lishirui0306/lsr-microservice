@@ -1,7 +1,7 @@
 spring:
   cloud:
     consul:
-      host: 106.54.114.230
+      host: 192.168.0.104
       port: 8500
       config:
         prefix: config

@@ -6,14 +6,14 @@ spring:
     name: lsr-redis-lock # 对外暴露的服务名称
     cloud:
       consul:
-        host: 106.54.114.230
+        host: 192.168.0.104
         port: 8500
         discovery:
           service-name: ${spring.application.name}
           prefer-ip-address: true
   #redis
   redis:
-    host: 106.54.114.230
+    host: 192.168.0.104
     port: 6379
     timeout: 10000
     usePool: true
