@@ -38,7 +38,7 @@ import java.util.UUID;
 @Controller
 public class UserController {
     //远程调用的consul 注册的服务名
-    @Value("${remote.server.name}")
+    //@Value("${remote.server.name}")
     private String remote;
     @Autowired
     private RestTemplate restTemplate;
