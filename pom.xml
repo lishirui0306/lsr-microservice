@@ -42,6 +42,7 @@
         <log4j.version>1.7.25</log4j.version>
         <spring.version>5.2.2.RELEASE</spring.version>
         <jedis.version>2.9.0</jedis.version>
+        <entity.api.version>1.0</entity.api.version>
     </properties>
 
     <dependencyManagement>
@@ -203,7 +204,11 @@
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${entity.api.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

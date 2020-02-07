@@ -1,0 +1,5 @@
+cn/lsr/user/controller/orther/OrtherController.class
+cn/lsr/user/UserServiceApplication.class
+cn/lsr/user/controller/user/UserController.class
+cn/lsr/user/controller/error/ErrorController.class
+cn/lsr/user/controller/login/LoginController.class
