@@ -129,6 +129,13 @@ swagger:
   license: 博客
   licenseUrl: https://www.cnblogs.com/hacker-lsr/
 #redis
+remote:
+  redis:
+   server:
+     name: lsr-redis-lock
+     getLockUrl: /getRedisLock
+     unLockUrl: /unRedisLock
+
 #feign
 feign:
   hystrix:

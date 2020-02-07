@@ -2,6 +2,7 @@ package cn.lsr.user.controller.user;
 
 import cn.lsr.redis.utils.RedisResult;
 import cn.lsr.redis.utils.UrlUtils;
+import cn.lsr.user.config.redis.RemoteRedisConfig;
 import cn.lsr.user.entity.user.User;
 import cn.lsr.user.mapper.user.UserMapper;
 import cn.lsr.utils.PageUtils;
@@ -13,7 +14,6 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
@@ -37,9 +37,8 @@ import java.util.UUID;
 @Api(tags = "用户信息控制器")
 @Controller
 public class UserController {
-    //远程调用的consul 注册的服务名
-    //@Value("${remote.server.name}")
-    private String remote;
+    @Autowired
+    private RemoteRedisConfig remoteRedisConfig;
     @Autowired
     private RestTemplate restTemplate;
     // 获取consul 服务信息
@@ -81,20 +80,6 @@ public class UserController {
         int pageBNum = Integer.parseInt(params.get("page").toString());
         int pageSize = Integer.parseInt(params.get("limit").toString());
         //获取consul 上的服务
-        List<ServiceInstance> redislock = discoveryClient.getInstances("lsr-redis-lock");
-        String servername;
-        if (redislock != null && redislock.size()>0) {
-            servername = redislock.get(0).getUri().toString();
-            System.out.println("获取到的服务地址："+servername);
-            String s = System.currentTimeMillis()+"";
-            ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/getRedisLock", "3", s), RedisResult.class);
-            if (entity.getBody().getStatus()==200){
-                System.out.println("============开始业务逻辑");
-            }else{
-                throw new RuntimeException(entity.getBody().getMessages());
-            }
-            ResponseEntity<RedisResult> out =restTemplate.getForEntity(UrlUtils.remouldUrl(servername+"/unRedisLock","3",s),RedisResult.class);
-        }
         Page page = PageHelper.startPage(pageBNum,pageSize);
         List<User> list = userMapper.selectAll();
         return  new PageUtils(list,page.getTotal());
@@ -142,7 +127,22 @@ public class UserController {
     @RequestMapping("/updateUser")
     @ResponseBody
     public Result updateUser(User user){
-        userMapper.updateByPrimaryKeySelective(user);
+        //获取consul 上的服务
+        List<ServiceInstance> redisLock = discoveryClient.getInstances(remoteRedisConfig.getRedisLockName());
+        String servername;
+        String time = System.currentTimeMillis()+"";
+        if (redisLock.size()>0&&redisLock != null) {
+            ServiceInstance serviceInstance = redisLock.get(0);
+            servername = serviceInstance.getUri().toString();
+            ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getGetLockUrl(), user.getUid(), time), RedisResult.class);
+            if (entity.getBody().getStatus()==200){
+                userMapper.updateByPrimaryKeySelective(user);
+            }else {
+                throw new RuntimeException(entity.getBody().getMessages());
+            }
+            ResponseEntity<RedisResult> entity1 = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getUnLockUrl(), user.getUid(), time), RedisResult.class);
+            System.out.println(entity1.getBody().getMessages());
+        }
         return Result.success("操作成功！");
     }
     /**
@@ -156,7 +156,21 @@ public class UserController {
     @RequestMapping("/delete/user")
     @ResponseBody
     public Result deleteUser(String uid){
-        userMapper.deleteByPrimaryKey(uid);
+        //获取consul 上的服务
+        List<ServiceInstance> instances = discoveryClient.getInstances(remoteRedisConfig.getRedisLockName());
+        String servername;
+        String time = System.currentTimeMillis()+"";
+        if (instances.size()>0&&instances != null) {
+            servername = instances.get(0).getUri().toString();
+            ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getGetLockUrl(), uid, time), RedisResult.class);
+            if (entity.getBody().getStatus()==200){
+                userMapper.deleteByPrimaryKey(uid);
+            }else {
+                throw new RuntimeException(entity.getBody().getMessages());
+            }
+            ResponseEntity<RedisResult> entity1 = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getUnLockUrl(), uid, time), RedisResult.class);
+            System.out.println(entity1.getBody().getMessages());
+        }
         return Result.success("操作成功");
     }
 
