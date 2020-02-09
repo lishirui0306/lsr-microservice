@@ -79,12 +79,37 @@ spring:
     encoding: utf-8
     #mode: LEGACYHTML5
 #redis
+#  redis:
+#    host: 192.168.0.104
+#    port: 6379
+#    timeout: 2000
+#    usePool: true
+#    useSsl: false
   redis:
-    host: 192.168.0.104
-    port: 6379
-    timeout: 2000
-    usePool: true
-    useSsl: false
+    #redis分布式锁配置
+    lock:
+      database: 0
+      host: 192.168.0.104
+      port: 6379
+      timeout: 20000
+      password:
+      pool:
+        maxActive: 8
+        minIdle: 0
+        maxIdle: 8
+        maxWait: -1
+    #db redis 存储操作
+    db:
+      database: 0
+      host: 192.168.0.104
+      port: 6379
+      timeout: 20000
+      password:
+      pool:
+        maxActive: 8
+        minIdle: 0
+        maxIdle: 8
+        maxWait: -1
 
 #mybatis配置
 mybatis:

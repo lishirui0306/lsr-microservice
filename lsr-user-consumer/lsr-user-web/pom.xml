@@ -14,10 +14,9 @@
     <dependencies>
         <dependency>
             <groupId>cn.lsr</groupId>
-            <artifactId>lsr-redis-core</artifactId>
+            <artifactId>lsr-redis-lock</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>cn.lsr</groupId>
             <artifactId>lsr-user-core</artifactId>

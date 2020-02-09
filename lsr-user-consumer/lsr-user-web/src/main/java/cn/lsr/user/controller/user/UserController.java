@@ -1,5 +1,6 @@
 package cn.lsr.user.controller.user;
 
+import cn.lsr.redis.lock.RedisInterFace;
 import cn.lsr.redis.utils.RedisResult;
 import cn.lsr.redis.utils.UrlUtils;
 import cn.lsr.user.core.redis.RemoteRedisConfig;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
+import redis.clients.jedis.Jedis;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,6 +39,12 @@ import java.util.UUID;
 @Api(tags = "用户信息控制器")
 @Controller
 public class UserController {
+    /**
+     * 注入redis服务
+     */
+    @Resource
+    private RedisInterFace redisInterFace;
+
     @Autowired
     private RemoteRedisConfig remoteRedisConfig;
     @Autowired
@@ -77,6 +85,8 @@ public class UserController {
     @RequestMapping("/userlist")
     @ResponseBody
     public PageUtils listUser(@RequestParam Map<String, Object> params){
+        redisInterFace.lock("1","2");
+        redisInterFace.unlock("1","2");
         int pageBNum = Integer.parseInt(params.get("page").toString());
         int pageSize = Integer.parseInt(params.get("limit").toString());
         //获取consul 上的服务
@@ -156,6 +166,7 @@ public class UserController {
     @RequestMapping("/delete/user")
     @ResponseBody
     public Result deleteUser(String uid){
+
         //获取consul 上的服务
         List<ServiceInstance> instances = discoveryClient.getInstances(remoteRedisConfig.getRedisLockName());
         String servername;
@@ -173,5 +184,9 @@ public class UserController {
         }
         return Result.success("操作成功");
     }
-
+    public static void main(String[] args) {
+        Jedis jedis = new Jedis("192.168.0.104",6379);
+        jedis.ping();
+        System.out.println(jedis.ping());
+    }
 }
