@@ -85,8 +85,7 @@ public class UserController {
     @RequestMapping("/userlist")
     @ResponseBody
     public PageUtils listUser(@RequestParam Map<String, Object> params){
-        redisInterFace.lock("1","2");
-        redisInterFace.unlock("1","2");
+
         int pageBNum = Integer.parseInt(params.get("page").toString());
         int pageSize = Integer.parseInt(params.get("limit").toString());
         //获取consul 上的服务
@@ -137,7 +136,7 @@ public class UserController {
     @RequestMapping("/updateUser")
     @ResponseBody
     public Result updateUser(User user){
-        //获取consul 上的服务
+       //获取consul 上的服务
         List<ServiceInstance> redisLock = discoveryClient.getInstances(remoteRedisConfig.getRedisLockName());
         String servername;
         String time = System.currentTimeMillis()+"";
@@ -166,22 +165,15 @@ public class UserController {
     @RequestMapping("/delete/user")
     @ResponseBody
     public Result deleteUser(String uid){
-
-        //获取consul 上的服务
-        List<ServiceInstance> instances = discoveryClient.getInstances(remoteRedisConfig.getRedisLockName());
-        String servername;
         String time = System.currentTimeMillis()+"";
-        if (instances.size()>0&&instances != null) {
-            servername = instances.get(0).getUri().toString();
-            ResponseEntity<RedisResult> entity = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getGetLockUrl(), uid, time), RedisResult.class);
-            if (entity.getBody().getStatus()==200){
-                userMapper.deleteByPrimaryKey(uid);
-            }else {
-                throw new RuntimeException(entity.getBody().getMessages());
-            }
-            ResponseEntity<RedisResult> entity1 = restTemplate.getForEntity(UrlUtils.remouldUrl(servername + remoteRedisConfig.getUnLockUrl(), uid, time), RedisResult.class);
-            System.out.println(entity1.getBody().getMessages());
+        RedisResult lock = redisInterFace.lock(uid, time);
+        if (lock.getStatus()==200){
+            userMapper.deleteByPrimaryKey(uid);
+        }else {
+            throw new RuntimeException(lock.getMessages());
         }
+        RedisResult unlock = redisInterFace.unlock(uid, time);
+        log.info("reids锁释放:{}",unlock.getMessages());
         return Result.success("操作成功");
     }
     public static void main(String[] args) {
