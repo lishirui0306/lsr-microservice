@@ -24,6 +24,11 @@ import java.time.Duration;
  * @version: V1.0
  **/
 public class LSRBaseRedisConfig {
+    /**
+     * jedis 连接工厂
+     * @param redisPropertiesConfig
+     * @return
+     */
     public JedisConnectionFactory buildJedisConnectionFactory(RedisPropertiesConfig redisPropertiesConfig) {
         JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
         jedisConnectionFactory.setDatabase(redisPropertiesConfig.getDatabase());
@@ -48,6 +53,11 @@ public class LSRBaseRedisConfig {
         this.timeToLive = timeToLive;
     }
 
+    /**
+     * 缓存
+     * @param factory
+     * @return
+     */
     public CacheManager cacheManager(RedisConnectionFactory factory) {
         RedisSerializer<String> redisSerializer = new StringRedisSerializer();
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
@@ -73,6 +83,11 @@ public class LSRBaseRedisConfig {
 //        return redisCacheManager;
     //}
 
+    /**
+     * RedisTemplate 初始化 序列化和反序列化
+     * @param redisConnectionFactory
+     * @return
+     */
     public RedisTemplate buidRedisTemplate(RedisConnectionFactory redisConnectionFactory) {
 
         /* Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
@@ -91,11 +106,9 @@ public class LSRBaseRedisConfig {
         template.afterPropertiesSet();
         return template;
         */
-
         RedisSerializer stringSerializer = new StringRedisSerializer();
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setConnectionFactory(redisConnectionFactory);
-
         redisTemplate.setKeySerializer(stringSerializer);
         redisTemplate.setValueSerializer(stringSerializer);
         redisTemplate.setHashKeySerializer(stringSerializer);

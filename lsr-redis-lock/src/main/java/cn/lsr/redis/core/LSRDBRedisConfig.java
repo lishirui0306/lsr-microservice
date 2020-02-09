@@ -19,6 +19,11 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 public class LSRDBRedisConfig extends LSRBaseRedisConfig {
     private static final Logger log = LoggerFactory.getLogger(LSRDBRedisConfig.class);
+    /**
+     *  初始化 jedis lsrDBRedisProperties 连接工厂 -- lsrDBJedisConnectionFactory
+     * @param redisPropertiesConfig
+     * @return
+     */
     @Bean(name = "lsrDBJedisConnectionFactory")
     @Override
     public JedisConnectionFactory buildJedisConnectionFactory(@Qualifier("lsrDBRedisProperties")RedisPropertiesConfig redisPropertiesConfig) {
@@ -26,6 +31,11 @@ public class LSRDBRedisConfig extends LSRBaseRedisConfig {
         return super.buildJedisConnectionFactory(redisPropertiesConfig);
     }
 
+    /**
+     * 初始化工厂中 lsrDBJedisConnectionFactory  的 lsrDBRedisTemplate
+     * @param redisConnectionFactory
+     * @return
+     */
     @Bean(name = "lsrDBRedisTemplate")
     @Override
     public RedisTemplate <Object, Object> buidRedisTemplate(@Qualifier("lsrDBJedisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
@@ -38,6 +48,10 @@ public class LSRDBRedisConfig extends LSRBaseRedisConfig {
 //        return super.cacheManager(redisTemplate);
 //    }
 
+    /**
+     * 启动加载配置文件 yml  redis 连接参数
+     * @return
+     */
     @Bean(name = "lsrDBRedisProperties")
     @ConfigurationProperties(prefix = "spring.redis.db")
     public RedisPropertiesConfig getBaseDBProperties() {

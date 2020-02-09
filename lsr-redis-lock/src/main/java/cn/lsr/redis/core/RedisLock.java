@@ -24,9 +24,7 @@ public class RedisLock {
     private RedisTemplate redisTemplate;
     @Resource(name = "lsrDBRedisTemplate")
     private RedisTemplate redisTemplate2;
-//
-//    @Autowired
-//    private StringRedisTemplate redisTemplate;
+
     /**
      * 加锁
      * @param key id
