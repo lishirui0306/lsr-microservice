@@ -1,0 +1,11 @@
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/redis/RemoteRedisConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/shiro/AuthRealm.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/swagger/SwaggerConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/utils/PasswordUtil.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/druid/DruidConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/rest/RestTemplateConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/shiro/WebMvcConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/shiro/ShiroConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/utils/KaptchaConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/mapper/MyMapper.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/lsr-user-core/src/main/java/cn/lsr/user/core/shiro/FormLoginFilter.java
