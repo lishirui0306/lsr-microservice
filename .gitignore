@@ -1,6 +1,6 @@
 # Compiled class file
 *.class
-
+package-lock.json
 # Log file
 *.log
 .DS_Store
