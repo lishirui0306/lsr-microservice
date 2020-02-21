@@ -47,6 +47,7 @@ public class UserController {
 
     @Autowired
     private RemoteRedisConfig remoteRedisConfig;
+
     @Autowired
     private RestTemplate restTemplate;
     // 获取consul 服务信息

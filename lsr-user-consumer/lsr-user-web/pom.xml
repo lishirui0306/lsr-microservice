@@ -14,6 +14,11 @@
     <dependencies>
         <dependency>
             <groupId>cn.lsr</groupId>
+            <artifactId>lsr-log-usercustom</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.lsr</groupId>
             <artifactId>lsr-redis-lock</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -41,6 +46,13 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <!--解决启动日志冲突-->
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
