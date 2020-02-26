@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>用户列表</title>
+<link rel="icon" th:href="@{/static/images/users/favicon.ico}" type="image/ico">
+<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/materialdesignicons.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/animate.css}" rel="stylesheet">
+<link th:href="@{/static/css/style.min.css}" rel="stylesheet">
+<link th:href="@{/static/layer/theme/default/layer.css}" rel="stylesheet">
+<link th:href="@{/static/js/bootstrap-table/bootstrap-table.min.css}" rel="stylesheet">
+</head>
+
+<body>
+<div class="container-fluid p-t-15">
+  
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header"><h4>用户信息列表</h4></div>
+        <div class="card-body">
+          
+          <div id="toolbar" class="toolbar-btn-action">
+            <button id="btn_add" type="button" onclick="addUser()"  class="btn-sm btn-primary m-r-5">
+              <span class="mdi mdi-plus" aria-hidden="true"></span>新增
+            </button>
+          </div>
+
+          <table id="usertable" class="table table-bordered table-hover table-striped"></table>
+ 
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/perfect-scrollbar.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap-table/bootstrap-table.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap-table/bootstrap-table-zh-CN.min.js}"></script>
+
+<!--行内编辑插件-->
+<link th:href="@{/static/js/x-editable/1.5.1/bootstrap3-editable/css/bootstrap-editable.min.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/static/js/x-editable/1.5.1/bootstrap3-editable/js/bootstrap-editable.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap-table/extensions/editable/bootstrap-table-editable.min.js}"></script>
+
+<script type="text/javascript" th:src="@{/static/js/main.min.js}"></script>
+<script type="text/javascript">
+$('#usertable').bootstrapTable({
+    url: '/userlist',
+    method: 'get',
+    dataType : 'json',        // 因为本示例中是跨域的调用,所以涉及到ajax都采用jsonp,
+    uniqueId: 'id',
+    idField: 'uid',             // 每行的唯一标识字段
+    toolbar: '#toolbar',       // 工具按钮容器
+    //clickToSelect: true,     // 是否启用点击选中行
+    showColumns: true,         // 是否显示所有的列
+    showRefresh: true,         // 是否显示刷新按钮
+    //showToggle: true,        // 是否显示详细视图和列表视图的切换按钮(clickToSelect同时设置为true时点击会报错)
+    pagination: true,                    // 是否显示分页
+    sortOrder: "asc",                    // 排序方式
+    queryParams: function(params) {
+        var temp = {
+            limit: params.limit,         // 每页数据量
+            offset: params.offset,       // sql语句起始索引
+            page: (params.offset / params.limit) + 1,
+            sort: params.sort,           // 排序的列名
+            sortOrder: params.order      // 排序方式'asc' 'desc'
+        };
+        return temp;
+    },                                   // 传递参数
+    sidePagination: "server",            // 分页方式：client客户端分页，server服务端分页
+    pageNumber: 1,                       // 初始化加载第一页，默认第一页
+    pageSize: 5,                        // 每页的记录行数
+    pageList: [10, 25, 50, 100],         // 可供选择的每页的行数
+    //search: true,                      // 是否显示表格搜索，此搜索是客户端搜索
+    //showExport: true,        // 是否显示导出按钮, 导出功能需要导出插件支持(tableexport.min.js)
+    //exportDataType: "basic", // 导出数据类型, 'basic':当前页, 'all':所有数据, 'selected':选中的数据
+    columns: [{
+      checkbox: true    // 是否显示复选框
+    },{
+      title : '序号',
+      field : 'id',
+      align: 'center', // 左右居中
+      valign: 'middle', // 上下居中
+      width : '5%',
+      formatter : function(value, row, index) {
+        return index + 1;
+      }
+    }, {
+        field: 'usernick',
+        title: '昵称',
+        sortable: true,    // 是否排序
+        align: 'center', // 左右居中
+        valign: 'middle' // 上下居中
+    }, {
+        field: 'username',
+        title: '登录账号',
+        align: 'center', // 左右居中
+        valign: 'middle' // 上下居中
+    }, {
+        field: 'mail',
+        title: '邮箱',
+        align: 'center', // 左右居中
+        valign: 'middle' // 上下居中
+    }, {
+        field: 'locked',
+        title: '状态',
+        align: 'center', // 左右居中
+        valign: 'middle', // 上下居中
+    }, {
+        field: 'operate',
+        title: '操作',
+        align: 'center', // 左右居中
+        valign: 'middle', // 上下居中
+        formatter: btnGroup,  // 自定义方法
+        events: {
+            'click .btn-warning': function (event, value, row, index) {
+                editUser(row);
+            },
+            'click .btn-danger': function (event, value, row, index) {
+                delUser(row);
+            }
+        }
+    }],
+    onLoadSuccess: function(data){
+        $("[data-toggle='tooltip']").tooltip();
+    }
+});
+function addUser() {
+    layer.open({
+        type: 2,
+        title: '用户新增',
+        maxmin: true,
+        skin: 'layui-layer-demo',
+        shadeClose: true, //点击遮罩关闭层
+        area : ['350px' , '450px'],
+        content:'/user/add'//弹框显示的url,对应的页面
+    });
+  //刷新
+  $("#usertable").bootstrapTable('refresh');
+}
+// 操作按钮
+function btnGroup ()
+{
+    let html =
+        ' <button  type="button" class="btn btn-sm btn-warning m-r-5"> <span class="mdi mdi-pencil" ></span>修改</button>' +
+        ' <button  type="button" class="btn btn-sm btn-danger"><span class="mdi mdi-window-close" ></span>删除</button>';
+    return html;
+}
+
+// 操作方法 - 编辑
+function editUser(data) {
+    console.table(data);
+}
+// 操作方法 - 删除
+function delUser(row) {
+    //询问框
+    layer.confirm('确定删除？',{icon :2,title:"信息提示"}, function(){
+        $.post("/delete/user",{"uid":row.uid},function(data){
+          console.table(data);
+          if (data.status==200){
+            layer.msg("操作成功！",{icon: 1});
+          }else{
+            layer.msg("操作失败！",{icon:2});
+          }
+          //刷新
+          $("#usertable").bootstrapTable('refresh');
+        });
+
+    });
+}
+</script>
+</body>
+</html>
