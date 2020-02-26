@@ -8,14 +8,33 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>lsr-common</artifactId>
+
+    <artifactId>lsr-redis-core</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>
+        <!--######################### 定义 redis 版本 #########################-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!--######################### 定义 jedis 版本 #########################-->
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+        </dependency>
         <!--######################### 定义 json 版本 #########################-->
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
         </dependency>
         <!--######################### 定义 lang3 版本 #########################-->
         <dependency>
@@ -23,5 +42,6 @@
             <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
+
 
 </project>

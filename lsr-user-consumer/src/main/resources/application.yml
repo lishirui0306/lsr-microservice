@@ -1,0 +1,150 @@
+# 服务端口号
+server:
+  port: 8002
+# 数据库地址  10.18.88.78 10.18.88.78
+datasource:
+  url: 10.18.88.78:3306/lsr-microservice
+spring:
+  application:
+    name: lsr-user-consumer # 对外暴露的服务名称
+  datasource:
+    driver-class-name : com.mysql.jdbc.Driver
+    url : jdbc:mysql://${datasource.url}?useUnicode=true&characterEncoding=utf8&jdbcCompliantTruncation=true&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&autoReconnect=true
+    username : root
+    password : lishirui
+    type : com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size : 20
+      min-idle : 1
+      max-active : 500
+      max-wait : 60000
+      time-between-eviction-runs-millis : 60000
+      #      min-evictable-idle-time-millis : 300000
+      #      max-evictable-idle-time-millis : 300000
+      validation-query : SELECT 1
+      validation-query-timeout : 30000
+      test-while-idle : true
+      test-on-borrow : false
+      test-on-return : false
+      pool-prepared-statements : false
+      max-pool-prepared-statement-per-connection-size : 20
+      max-open-prepared-statements : 20
+      filters : stat,slf4j
+      filter:
+        slf4j:
+          enabled: true
+          statement-executable-sql-log-enable: true
+  jackson:
+    date-format: "yyyy-MM-dd HH:mm:ss"
+    time-zone: "GMT+08"
+    default-property-inclusion: non_null
+  http:
+    encoding:
+      force: true
+      charset: utf-8
+      enabled: true
+  mvc:
+    throw-exception-if-no-handler-found: true #出现 404 错误时, 直接抛出异常
+  resources:
+    add-mappings: false #不要为我们工程中的资源文件建立映射
+
+#thymeleaf
+  thymeleaf:
+    # 配置thymeleaf修改页面不重启生效
+    cache: false
+    encoding: utf-8
+    #mode: LEGACYHTML5
+
+  #redis 多数据源配置
+  redis:
+    #redis分布式锁配置
+    lock:
+      database: 0
+      host: 10.18.88.78
+      port: 6379
+      timeout: 20000
+      password:
+      pool:
+        maxActive: 8
+        minIdle: 0
+        maxIdle: 8
+        maxWait: -1
+    #db redis 存储操作
+    db:
+      database: 0
+      host: 10.18.88.78
+      port: 6379
+      timeout: 20000
+      password:
+      pool:
+        maxActive: 8
+        minIdle: 0
+        maxIdle: 8
+        maxWait: -1
+
+#mybatis配置
+mybatis:
+  #配置mapper地址
+  mapper-locations: classpath:mapper/*/*.xml
+  #配置实体bean地址
+  type-aliases-package: cn.lsr.user.entity
+  configuration:
+    map-underscore-to-camel-case: true # 驼峰命名规范
+    default-fetch-size: 100
+    default-statement-timeout: 30
+    #打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    
+#mybatis 分页配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: false
+  support-methods-arguments: true
+  params: count=countSql
+
+#通用mapper配置
+mapper:
+  #公用接口类路径
+  mappers: cn.lsr.core.config.mapper.MyMapper
+  identity: MYSQL
+
+# 线程池配置
+thread:
+  enable: true
+  corePoolSize: 10
+  maximumPoolSize: 30
+  keepAliveTime: 2000
+#轮询线程
+lsr:
+  poll:
+    thread:
+      enabled: true
+      threadId: LSRThread
+      threadName: 轮询线程
+      timeInterval: 60
+      delay: 60
+# swagger配置   访问 http://127.0.0.1:8001/swagger-ui.html
+swagger:
+  enabled: true
+
+#feign
+feign:
+  hystrix:
+    enabled: true
+
+#日志
+logging:
+  level:
+    com:
+      lockie:
+        order:
+          mapper: debug
+
+#shiro          
+shiro:
+  #loginUrl: /login         # 用户未登录时跳转的请求路径
+  unauthorizedUrl: /403  # 用户没有访问权限时跳转的请求路径
+  userNativeSessionManager: true
+  sessionManager:
+    cookie:
+      name: LSRSID

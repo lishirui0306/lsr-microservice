@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>cn.lsr</groupId>
+    <artifactId>lsr-dependencies-bom</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <!--控制所有版本依赖-->
+    <properties>
+        <spring-cloud.version>Greenwich.SR4</spring-cloud.version>
+        <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
+        <druid.version>1.1.10</druid.version>
+        <mysql.version>5.1.46</mysql.version>
+        <mybatis.version>2.1.1</mybatis.version>
+        <mybatis.page.version>1.2.5</mybatis.page.version>
+        <mapper.version>2.1.5</mapper.version>
+        <consul.version>2.1.1.RELEASE</consul.version>
+        <swagger.version>2.9.2</swagger.version>
+        <shiro.boot.version>1.4.0</shiro.boot.version>
+        <shiro.thymeleaf.version>2.0.0</shiro.thymeleaf.version>
+        <kaptcha.version>1.1.0</kaptcha.version>
+        <thymeleaf.version>2.0.7.0</thymeleaf.version>
+        <jedis.version>2.9.0</jedis.version>
+        <entity.api.version>1.0</entity.api.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <jackson-databind.version>2.9.6</jackson-databind.version>
+        <lang3.version>3.1</lang3.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!--######################### 定义 spring cloud 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--######################### 定义 spring boot 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <!--######################### spring boot web 依赖 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <!-- 排除默认的logback日志，使用log4j-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 log4j 版本 #########################-->
+            <!-- 支持log4j2的模块，注意把spring-boot-starter和spring-boot-starter-web包中的logging去掉 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-log4j2</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 openfeign 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 hystrix 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 shiro 版本 #########################-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring-boot-web-starter</artifactId>
+                <version>${shiro.boot.version}</version>
+            </dependency>
+            <!--######################### 定义 验证码 版本 #########################-->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>kaptcha-spring-boot-starter</artifactId>
+                <version>${kaptcha.version}</version>
+            </dependency>
+            <!--######################### 定义 thymeleaf 版本 #########################-->
+            <dependency>
+                <groupId>com.github.theborakompanioni</groupId>
+                <artifactId>thymeleaf-extras-shiro</artifactId>
+                <version>${shiro.thymeleaf.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.spt-oss</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${thymeleaf.version}</version>
+            </dependency>
+            <!--######################### 定义 druid 版本 #########################-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!--######################### 定义 mysql 版本 #########################-->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!--######################### 定义 mybatis 版本 #########################-->
+            <dependency>
+                <groupId>org.mybatis.spring.boot</groupId>
+                <artifactId>mybatis-spring-boot-starter</artifactId>
+                <version>${mybatis.version}</version>
+            </dependency>
+            <!--######################### 定义 mapper 版本 #########################-->
+            <dependency>
+                <groupId>tk.mybatis</groupId>
+                <artifactId>mapper-spring-boot-starter</artifactId>
+                <version>${mapper.version}</version>
+            </dependency>
+            <!--######################### 定义 分页插件 版本 #########################-->
+            <dependency>
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${mybatis.page.version}</version>
+            </dependency>
+            <!--######################### 定义 consul 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
+                <version>${consul.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-consul-config</artifactId>
+                <version>${consul.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-actuator</artifactId>
+                <version>${consul.version}</version>
+            </dependency>
+            <!--######################### 定义 swagger2 版本 #########################-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!--######################### 定义 redis 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-redis</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 jedis 版本 #########################-->
+            <dependency>
+                <groupId>redis.clients</groupId>
+                <artifactId>jedis</artifactId>
+                <version>${jedis.version}</version>
+            </dependency>
+            <!--######################### 定义 entity 版本 #########################-->
+            <dependency>
+                <groupId>javax.persistence</groupId>
+                <artifactId>persistence-api</artifactId>
+                <version>${entity.api.version}</version>
+            </dependency>
+            <!--######################### 定义 json 版本 #########################-->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <!--解决启动报错问题-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.fasterxml.jackson.core</groupId>
+                        <artifactId>jackson-annotations</artifactId>
+                    </exclusion>
+                </exclusions>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson-databind.version}</version>
+            </dependency>
+            <!--######################### 定义 lang3 版本 #########################-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${lang3.version}</version>
+            </dependency>
+            <!--######################### 定义 热部署 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-devtools</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

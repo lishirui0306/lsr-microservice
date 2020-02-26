@@ -8,230 +8,52 @@
     <artifactId>lsr-microservice</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
+        <module>lsr-dependencies-bom</module>
         <module>lsr-common</module>
-        <module>lsr-order-provider</module>
+        <module>lsr-redis-core</module>
         <module>lsr-user-consumer</module>
-        <module>lsr-redis-lock</module>
+        <module>lsr-core-base</module>
     </modules>
     <packaging>pom</packaging>
 
     <properties>
+        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <spring-cloud.version>Finchley.RELEASE</spring-cloud.version>
-        <spring-boot.version>2.0.3.RELEASE</spring-boot.version>
-        <mysql.version>5.1.46</mysql.version>
-        <mybatis.version>2.1.1</mybatis.version>
-        <mapper.version>2.1.5</mapper.version>
-        <mybatis.page.version>1.2.5</mybatis.page.version>
-        <lombok.version>1.16.18</lombok.version>
-        <consul.version>2.1.1.RELEASE</consul.version>
-        <consul.config.version>2.1.1.RELEASE</consul.config.version>
-        <consul.actuator.version>2.1.11.RELEASE</consul.actuator.version>
-        <swagger.version>2.9.2</swagger.version>
-        <swagger.ui.version>2.9.2</swagger.ui.version>
-        <shiro.boot.version>1.4.0</shiro.boot.version>
-        <shiro.thymeleaf.version>2.0.0</shiro.thymeleaf.version>
-        <kaptcha.version>1.1.0</kaptcha.version>
-        <thymeleaf.version>2.0.7.0</thymeleaf.version>
-        <lang3.version>3.1</lang3.version>
-        <fastjson.version>1.2.47</fastjson.version>
-        <jackson-databind.version>2.9.6</jackson-databind.version>
-        <druid.version>1.1.9</druid.version>
-        <tomcat.version>4.0.1</tomcat.version>
-        <log4j.version>1.7.25</log4j.version>
-        <spring.version>5.2.2.RELEASE</spring.version>
-        <spring.context>4.3.10.RELEASE</spring.context>
-        <jedis.version>2.9.0</jedis.version>
-        <entity.api.version>1.0</entity.api.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <!-- 定义 spring cloud 版本 -->
+            <!--######################### 版本控制pom #########################-->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-dependencies</artifactId>
-                <version>${spring-cloud.version}</version>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-dependencies-bom</artifactId>
+                <version>1.0-SNAPSHOT</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- 定义 spring boot 版本 -->
+            <!--######################### 定义 模块 版本 #########################-->
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-common</artifactId>
+                <version>${project.version}</version>
             </dependency>
-            <!-- 定义 mysql 版本 -->
+
             <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql.version}</version>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-redis-core</artifactId>
+                <version>${project.version}</version>
             </dependency>
-            <!-- 定义 mybatis 版本 -->
+
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-user-consumer</artifactId>
+                <version>${project.version}</version>
             </dependency>
-            <!--mapper-->
+
             <dependency>
-                <groupId>tk.mybatis</groupId>
-                <artifactId>mapper-spring-boot-starter</artifactId>
-                <version>${mapper.version}</version>
-            </dependency>
-            <!-- 分页插件 -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${mybatis.page.version}</version>
-            </dependency>
-            <!-- 定义 lombok 版本 -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>${lombok.version}</version>
-            </dependency>
-            <!--consul-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-                <version>${consul.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-consul-config</artifactId>
-                <version>${consul.config.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-actuator</artifactId>
-                <version>${consul.actuator.version}</version>
-            </dependency>
-            <!--swagger2-->
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-swagger-ui</artifactId>
-                <version>${swagger.ui.version}</version>
-            </dependency>
-            <!--shiro-->
-            <dependency>
-                <groupId>org.apache.shiro</groupId>
-                <artifactId>shiro-spring-boot-web-starter</artifactId>
-                <version>${shiro.boot.version}</version>
-            </dependency>
-            <!--验证码-->
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>kaptcha-spring-boot-starter</artifactId>
-                <version>${kaptcha.version}</version>
-            </dependency>
-            <!--thymeleaf-->
-            <dependency>
-                <groupId>com.github.theborakompanioni</groupId>
-                <artifactId>thymeleaf-extras-shiro</artifactId>
-                <version>${shiro.thymeleaf.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.github.spt-oss</groupId>
-                <artifactId>spring-boot-starter-thymeleaf</artifactId>
-                <version>${thymeleaf.version}</version>
-            </dependency>
-            <!--openfeign-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-openfeign</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <!--hystrix-->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <!--json-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-databind</artifactId>
-                <!--解决启动报错问题-->
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.fasterxml.jackson.core</groupId>
-                        <artifactId>jackson-annotations</artifactId>
-                    </exclusion>
-                </exclusions>
-                <version>${jackson-databind.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.fasterxml.jackson.core</groupId>
-                <artifactId>jackson-annotations</artifactId>
-                <version>${jackson-databind.version}</version>
-            </dependency>
-            <!--lang3-->
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${lang3.version}</version>
-            </dependency>
-            <!--druid-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid.version}</version>
-            </dependency>
-            <!--tomcat-->
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>${tomcat.version}</version>
-                <scope>provided</scope>
-            </dependency>
-            <!--log4j-->
-            <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
-            <!--热部署-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-devtools</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <!--redis-->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring-boot.version}</version>
-            </dependency>
-            <!--jedis-->
-            <dependency>
-                <groupId>redis.clients</groupId>
-                <artifactId>jedis</artifactId>
-                <version>${jedis.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>javax.persistence</groupId>
-                <artifactId>persistence-api</artifactId>
-                <version>${entity.api.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.context}</version>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-core-base</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
         </dependencies>
@@ -240,10 +62,30 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <version>2.1.9.RELEASE</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
 </project>
