@@ -1,5 +1,7 @@
 package cn.lsr.user.service.user.iml;
 
+import cn.lsr.core.config.annotation.DS;
+import cn.lsr.core.config.druid.DataSourceType;
 import cn.lsr.user.entity.user.User;
 import cn.lsr.user.mapper.user.UserMapper;
 import cn.lsr.user.service.user.UserService;
@@ -18,6 +20,7 @@ public class userServiceIml implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
     @Override
     public User selectByName(String username) {
         return userMapper.selectByName(username);
@@ -27,7 +30,6 @@ public class userServiceIml implements UserService {
     public User selectUserByName(String username) {
         return userMapper.selectUserByName(username);
     }
-
     @Override
     public User selecTest(String username) {
         return userMapper.selecTest(username);

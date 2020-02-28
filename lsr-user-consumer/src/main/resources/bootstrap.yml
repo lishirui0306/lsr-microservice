@@ -5,7 +5,9 @@ spring:
       host: 10.18.88.78
       port: 8500
       discovery:
-        service-name: lsr-user-consumer # 对外暴露的服务名称
+        instance-id: test
+        # 对外暴露的服务名称
+        service-name: lsr-user-consumer
         prefer-ip-address: true
       config:
         prefix: config

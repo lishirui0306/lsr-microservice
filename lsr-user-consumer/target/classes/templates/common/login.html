@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>登录(Terry)后台管理系统</title>
+<link rel="icon" th:href="@{/static/images/users/favicon.ico}" type="image/ico">
+<link th:href="@{/static/css/bootstrap.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/materialdesignicons.min.css}" rel="stylesheet">
+<link th:href="@{/static/css/style.min.css}" rel="stylesheet">
+
+<style>
+.lyear-wrapper {
+    position: relative;
+}
+.lyear-login {
+    display: flex !important;
+    min-height: 100vh;
+    align-items: center !important;
+    justify-content: center !important;
+}
+.login-center {
+    background: #fff;
+    min-width: 38.25rem;
+    padding: 2.14286em 3.57143em;
+    border-radius: 5px;
+    margin: 2.85714em 0;
+}
+.login-header {
+    margin-bottom: 1.5rem !important;
+}
+.login-center .has-feedback.feedback-left .form-control {
+    padding-left: 38px;
+    padding-right: 12px;
+}
+.login-center .has-feedback.feedback-left .form-control-feedback {
+    left: 0;
+    right: auto;
+    width: 38px;
+    height: 38px;
+    line-height: 38px;
+    z-index: 4;
+    color: #dcdcdc;
+}
+.login-center .has-feedback.feedback-left.row .form-control-feedback {
+    left: 15px;
+}
+</style>
+</head>
+  
+<body>
+<div class="row lyear-wrapper">
+  <div class="lyear-login">
+    <div class="login-center">
+      <div class="login-header text-center">
+        <a th:href="@{/templates/common/index.html}"> <img alt="light year admin" th:src="@{/static/images/log-title.png}"> </a>
+      </div>
+      <form action="/tologin" method="post">
+        <div class="form-group has-feedback feedback-left">
+          <input type="text" placeholder="请输入您的用户名" class="form-control" name="username" id="username" />
+          <span class="mdi mdi-account form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="form-group has-feedback feedback-left">
+          <input type="password" placeholder="请输入密码" class="form-control" id="password" name="password" />
+          <span class="mdi mdi-lock form-control-feedback" aria-hidden="true"></span>
+        </div>
+        <div class="form-group has-feedback feedback-left row">
+          <div class="col-xs-7">
+            <input type="text" name="captcha" class="form-control" placeholder="验证码">
+            <span class="mdi mdi-check-all form-control-feedback" aria-hidden="true"></span>
+          </div>
+          <div class="col-xs-5">
+            <img src="/getCode" class="pull-right" id="captcha" style="cursor: pointer;" onclick="refreshCode()" title="点击刷新" alt="captcha">
+          </div>
+        </div>
+        <!--<span th:text="${msg}" style="color: red"></span><br>-->
+        <div class="form-group">
+          <button class="btn btn-block btn-primary" type="submit" value="Login">立即登录</button>
+        </div>
+      </form>
+      <hr>
+      <footer class="col-sm-12 text-center">
+        <p class="m-b-0">Copyright © 2019 <a th:href="@{https://github.com/lishirui0306/lsr-boot-cloud}">Terry-lsr</a>. All right reserved</p>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/static/layer/layer.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+  $(function () {
+     var msg = "[[${msg}]]";
+     if(msg=="验证码不正确"){
+         layer.msg("验证码不正确!",{icon:2,area:['50px', '65px']});
+     }else if (msg=="账户不存在"){
+         layer.msg("账户不存在!",{icon:0,area:['50px', '65px']});
+     }else if(msg=="状态不正常"){
+         layer.msg("状态不正常!",{icon:4,area:['50px', '65px']});
+     }else if(msg=="密码不正确"){
+         layer.msg("密码不正确!",{icon:2,area:['50px', '65px']});
+     }
+  });
+    function refreshCode() {
+        document.getElementById("captcha").setAttribute("src","/getCode");
+    }
+</script>
+
+
+</body>
+</html>

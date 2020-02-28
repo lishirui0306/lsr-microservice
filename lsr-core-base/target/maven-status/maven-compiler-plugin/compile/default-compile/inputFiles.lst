@@ -1,0 +1,16 @@
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/annotation/DS.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/aspectImp/DynamicDataSourceAspect.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/druid/DruidSettings.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/mapper/MyMapper.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/thread/PollThreadConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/druid/DataSourceType.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/thread/TestServerPollThread.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/swagger/Swagger2.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/thread/AbstractPollThread.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/druid/DynamicDataSource.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/thread/PollThreadManager.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/bean/BeanConfigManager.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/util/SpringUtil.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/util/KaptchaConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/druid/DruidConfig.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-core-base/src/main/java/cn/lsr/core/config/swagger/SwaggerConfig.java

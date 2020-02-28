@@ -21,7 +21,7 @@ public class PollThreadConfig {
     private String threadName;
 
     /**
-     *
+     * 间隔时间
      */
     private Long timeInterval;
 

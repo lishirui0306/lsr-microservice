@@ -62,7 +62,7 @@ public abstract class AbstractPollThread {
                 public void run() {
                     // 异步线程资源清理
                     //清理完上下文数据，在打log4j标记
-                    log.info("\n--------------------轮训线程[" + AbstractPollThread.this.threadName + "]开始调度--------------------\n");
+                    log.info("--------------------轮训线程[" + AbstractPollThread.this.threadName + "]开始调度--------------------");
                     // 2015.4.20 每个线程开始受理请求时对数据库连接进行检查，若不可用则重连一次
                     long start = System.currentTimeMillis();
                     try {
@@ -77,7 +77,7 @@ public abstract class AbstractPollThread {
                     } finally {
                         AbstractPollThread.this.processCount++;
                         AbstractPollThread.this.processTime = AbstractPollThread.this.processTime + System.currentTimeMillis() - start;
-						log.info("\n--------------------轮训线程[" + AbstractPollThread.this.threadName + "]调度结束. [" + (System.currentTimeMillis() - start) + "]--------------------\n");
+						log.info("--------------------轮训线程[" + AbstractPollThread.this.threadName + "]调度结束. [" + (System.currentTimeMillis() - start) + "]--------------------");
                         //  异步线程资源清理
                     }
                 }

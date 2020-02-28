@@ -152,7 +152,8 @@ public class UserController {
         String time = System.currentTimeMillis()+"";
         RedisResult lock = redisInterFace.lock(uid, time);
         if (lock.getStatus()==200){
-            userMapper.deleteByPrimaryKey(uid);
+            //userMapper.deleteByPrimaryKey(uid);
+            userMapper.selecTest("admin");
         }else {
             throw new RuntimeException(lock.getMessages());
         }

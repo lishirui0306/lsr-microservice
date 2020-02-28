@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    consul:
+      # 10.18.88.78 192.168.0.104
+      host: 192.168.0.104
+      port: 8500
+      discovery:
+        instance-id: test
+        # 对外暴露的服务名称
+        service-name: lsr-user-consumer
+        prefer-ip-address: true
+      config:
+        prefix: config
+        enabled: true
+        format: YAML
+        data-key: user
