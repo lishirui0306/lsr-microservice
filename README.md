@@ -1,14 +1,10 @@
 # lsr-microservice
 Cloud分布式服务
-lsr-common          -- 公共组件
-lsr-order-provider  -- 服务调用者
-lsr-redis-lock      -- redis分布式锁
-lsr-user-consumer   -- 服务消费者
-
-所有服务均注册到consul 上，通过rest调用。
-
-lsr-user-consumer 依赖lsr-common ，lsr-redis-lock
-通过注入redis配置类，行进交互。
+lsr-common              -- 公共组件
+lsr-core-base           -- 基础服务
+lsr-redis-lock          -- redis分布式锁
+lsr-batch-processing    -- 批量处理(待完善)
+lsr-user-consumer       -- 服务端
 
 
 

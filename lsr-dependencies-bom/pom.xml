@@ -47,6 +47,12 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--######################### 定义 spring batch 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-batch</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <!--######################### spring boot web 依赖 #########################-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -216,6 +222,12 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-devtools</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 test 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
         </dependencies>

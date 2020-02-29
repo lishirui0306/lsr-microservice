@@ -13,6 +13,7 @@
         <module>lsr-redis-core</module>
         <module>lsr-user-consumer</module>
         <module>lsr-core-base</module>
+        <module>lsr-batch-processing</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -56,6 +57,11 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-batch-processing</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

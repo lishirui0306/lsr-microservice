@@ -2,7 +2,7 @@ spring:
   cloud:
     consul:
       # 10.18.88.78 192.168.0.104
-      host: 192.168.0.104
+      host: 10.18.88.78
       port: 8500
       discovery:
         instance-id: test
