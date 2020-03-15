@@ -11,10 +11,13 @@
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/controller/login/LoginController.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/entity/user/User.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/service/user/iml/userServiceIml.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/test/test.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/config/shiro/AuthRealm.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/entity/user/UserExample.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/config/shiro/FormLoginFilter.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/UserServiceApplication.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/controller/error/ErrorController.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/test/VolatileTest.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/entity/permission/Permission.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/test/Instance.java
 /Users/lsr/GitProjects/lsr-microservice/lsr-user-consumer/src/main/java/cn/lsr/user/mapper/role/RoleMapper.java

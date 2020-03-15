@@ -152,8 +152,9 @@ public class UserController {
         String time = System.currentTimeMillis()+"";
         RedisResult lock = redisInterFace.lock(uid, time);
         if (lock.getStatus()==200){
-            //userMapper.deleteByPrimaryKey(uid);
-            userMapper.selecTest("admin");
+            userMapper.deleteByPrimaryKey(uid);
+            // 测试 数据源切换
+            //userMapper.selecTest("admin");
         }else {
             throw new RuntimeException(lock.getMessages());
         }
@@ -166,4 +167,5 @@ public class UserController {
         jedis.ping();
         System.out.println(jedis.ping());
     }
+
 }

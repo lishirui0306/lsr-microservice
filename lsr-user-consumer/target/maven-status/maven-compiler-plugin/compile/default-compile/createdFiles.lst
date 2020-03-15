@@ -20,9 +20,12 @@ cn/lsr/user/entity/permission/PermissionExample$Criterion.class
 cn/lsr/user/mapper/role/RoleMapper.class
 cn/lsr/user/entity/permission/PermissionExample$GeneratedCriteria.class
 cn/lsr/user/entity/user/UserExample.class
+cn/lsr/user/test/VolatileTest.class
 cn/lsr/user/entity/role/Role.class
 cn/lsr/user/config/shiro/WebMvcConfig.class
+cn/lsr/user/test/test.class
 cn/lsr/user/service/user/iml/userServiceIml.class
+cn/lsr/user/test/Instance.class
 cn/lsr/user/entity/role/RoleExample.class
 cn/lsr/user/mapper/permission/PermissionMapper.class
 cn/UserServiceApplication.class
