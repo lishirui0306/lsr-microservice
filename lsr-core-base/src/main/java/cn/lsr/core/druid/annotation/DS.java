@@ -1,6 +1,6 @@
-package cn.lsr.core.config.annotation;
+package cn.lsr.core.druid.annotation;
 
-import cn.lsr.core.config.druid.DataSourceType;
+import cn.lsr.core.druid.common.DataSourceType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

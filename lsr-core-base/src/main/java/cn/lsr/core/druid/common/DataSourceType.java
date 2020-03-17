@@ -1,4 +1,4 @@
-package cn.lsr.core.config.druid;
+package cn.lsr.core.druid.common;
 
 /**
  * @Description: 数据源标识

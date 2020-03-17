@@ -1,7 +1,5 @@
 package cn.lsr.user.service.user.iml;
 
-import cn.lsr.core.config.annotation.DS;
-import cn.lsr.core.config.druid.DataSourceType;
 import cn.lsr.user.entity.user.User;
 import cn.lsr.user.mapper.user.UserMapper;
 import cn.lsr.user.service.user.UserService;

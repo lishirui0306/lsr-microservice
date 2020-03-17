@@ -1,7 +1,7 @@
 package cn.lsr.user.mapper.user;
 
-import cn.lsr.core.config.annotation.DS;
-import cn.lsr.core.config.druid.DataSourceType;
+import cn.lsr.core.druid.annotation.DS;
+import cn.lsr.core.druid.common.DataSourceType;
 import cn.lsr.core.config.mapper.MyMapper;
 import cn.lsr.user.entity.user.User;
 

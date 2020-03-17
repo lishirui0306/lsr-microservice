@@ -1,4 +1,4 @@
-package cn.lsr.core.config.druid;
+package cn.lsr.core.druid.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

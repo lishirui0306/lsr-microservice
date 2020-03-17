@@ -1,8 +1,8 @@
-package cn.lsr.core.config.aspectImp;
+package cn.lsr.core.druid.aspectImp;
 
-import cn.lsr.core.config.annotation.DS;
-import cn.lsr.core.config.druid.DataSourceType;
-import cn.lsr.core.config.druid.DynamicDataSource;
+import cn.lsr.core.druid.annotation.DS;
+import cn.lsr.core.druid.common.DataSourceType;
+import cn.lsr.core.druid.config.DynamicDataSource;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.After;

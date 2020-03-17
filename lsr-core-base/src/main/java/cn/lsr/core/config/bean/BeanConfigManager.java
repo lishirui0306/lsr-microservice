@@ -1,6 +1,5 @@
 package cn.lsr.core.config.bean;
 
-import cn.lsr.core.config.swagger.SwaggerConfig;
 import cn.lsr.core.thread.PollThreadConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;

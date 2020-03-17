@@ -1,4 +1,4 @@
-package cn.lsr.core.config.swagger;
+package cn.lsr.core.swagger;
 
 
 /**

@@ -1,6 +1,5 @@
-package cn.lsr.core.config.swagger;
+package cn.lsr.core.swagger;
 
-import cn.lsr.core.util.SpringUtil;
 import io.swagger.annotations.Api;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;

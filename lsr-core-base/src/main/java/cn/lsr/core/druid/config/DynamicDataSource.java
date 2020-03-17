@@ -1,5 +1,6 @@
-package cn.lsr.core.config.druid;
+package cn.lsr.core.druid.config;
 
+import cn.lsr.core.druid.common.DataSourceType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
