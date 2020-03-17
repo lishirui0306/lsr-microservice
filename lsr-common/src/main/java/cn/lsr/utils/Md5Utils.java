@@ -4,12 +4,9 @@ import java.security.MessageDigest;
 
 /**
  * Md5加密方法
- * 
- * @author ruoyi
+ *
  */
-public class Md5Utils
-{
-    //private static final Logger log = LoggerFactory.getLogger(Md5Utils.class);
+public class Md5Utils {
 
     private static byte[] md5(String s)
     {
