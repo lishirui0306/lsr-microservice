@@ -3,8 +3,15 @@ package cn.lsr.utils;
 import java.lang.management.ManagementFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
+
+import javax.xml.crypto.Data;
+
 /**
  * = = 时间工具类
  *
@@ -152,4 +159,47 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         // long sec = diff % nd % nh % nm / ns;
         return day + "天" + hour + "小时" + min + "分钟";
     }
+    /**
+     * 时间比较
+     * @param s 开始时间
+     * @param s1 结束时间
+     * @param s3 参数时间
+     * @return
+     */
+    public static boolean comparisonSize(String s ,String s1,String s3){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = simpleDateFormat.parse(s);
+            Date date2 = simpleDateFormat.parse(s1);
+            Date date3 = simpleDateFormat.parse(s3);
+            if (date3.before(date2)&&date3.after(date1)){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("时间比较错误");
+    }
+    /**
+     * 时间+1天
+     * @param s
+     * @return
+     */
+    public static String dateAdd(String s) {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date d;
+        try {
+            d = simpleDateFormat.parse(s);
+            c.setTime(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //利用Calendar 实现 Date日期+1天   
+        c.add(Calendar.DAY_OF_MONTH,1);
+        return simpleDateFormat.format(c.getTime());
+    }
+
 }
