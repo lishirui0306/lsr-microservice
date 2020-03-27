@@ -372,4 +372,14 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
         }
         return result.toString();
     }
+    /**
+     * 追加
+     * @param s 需要追加的String
+     * @param append    追加元素
+     * @return
+     */
+    public static String appendString(String s ,String append){
+        StringBuffer stringBuffers = new StringBuffer(s);
+        return stringBuffers.append(append).toString();
+    }
 }

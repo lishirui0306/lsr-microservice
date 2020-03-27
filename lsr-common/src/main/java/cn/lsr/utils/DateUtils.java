@@ -160,7 +160,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return day + "天" + hour + "小时" + min + "分钟";
     }
     /**
-     * 时间比较
+     * 时间比较 包括临界值
      * @param s 开始时间
      * @param s1 结束时间
      * @param s3 参数时间
@@ -172,7 +172,7 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
             Date date1 = simpleDateFormat.parse(s);
             Date date2 = simpleDateFormat.parse(s1);
             Date date3 = simpleDateFormat.parse(s3);
-            if (date3.before(date2)&&date3.after(date1)){
+            if (date3.before(date2)&&(date3.after(date1)||date3.equals(date1))){
                 return true;
             }else{
                 return false;
@@ -202,4 +202,26 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils
         return simpleDateFormat.format(c.getTime());
     }
 
+    /**
+     * 时间是否相等
+     * @param s
+     * @param s1
+     * @return
+     */
+    public static boolean comparisonDate(String s ,String s1) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date1,date2;
+        try {
+            date1 = simpleDateFormat.parse(s);
+            date2 = simpleDateFormat.parse(s1);
+            return  org.apache.commons.lang3.time.DateUtils.isSameDay(date1,date2);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        throw new RuntimeException("时间比较错误");
+    }
+    public static void main(String[] args) {
+        boolean b = comparisonSize("2019-01-01","2019-01-03","2019-01-03");
+        System.out.println(b);
+    }
 }
