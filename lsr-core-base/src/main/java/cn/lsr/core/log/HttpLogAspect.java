@@ -1,25 +1,27 @@
 package cn.lsr.core.log;
 
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * @Description: 请求日志切面
+ * @Description: 请求日志切面 表达式待调整
  * @Package: lsr-microservice
  * @author: Hacker_lsr@126.com
  **/
+//@Aspect
+//@Order(2)
+//@Component
 public class HttpLogAspect {
     public static Logger log = LoggerFactory.getLogger(HttpLogAspect.class);
-    @Pointcut("execution(public * cn.lsr.*.controller.*(..))")
+    @Pointcut("execution(* cn.lsr.*.controller..*.*(..))")
     public void log(){}
     @Before("log()")
     public void beforLog(JoinPoint joinPoint){
