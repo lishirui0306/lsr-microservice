@@ -23,6 +23,7 @@
         <kaptcha.version>1.1.0</kaptcha.version>
         <thymeleaf.version>2.0.7.0</thymeleaf.version>
         <jedis.version>2.9.0</jedis.version>
+        <ftp.version>3.6</ftp.version>
         <entity.api.version>1.0</entity.api.version>
         <fastjson.version>1.2.47</fastjson.version>
         <jackson-databind.version>2.10.2</jackson-databind.version>
@@ -77,6 +78,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-cache</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 FTP支持 版本 #########################-->
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>${ftp.version}</version>
             </dependency>
             <!--######################### 定义 log4j 版本 #########################-->
             <!-- 支持log4j2的模块，注意把spring-boot-starter和spring-boot-starter-web包中的logging去掉 -->

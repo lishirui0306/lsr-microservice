@@ -1,5 +1,6 @@
 package cn.lsr.core.config.bean;
 
+import cn.lsr.core.ftp.config.FtpConfig;
 import cn.lsr.core.thread.PollThreadConfig;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -18,5 +19,11 @@ public class BeanConfigManager {
     @ConditionalOnProperty(prefix="lsr.poll.thread", name="enabled", havingValue="true")
     public PollThreadConfig initPollThreadConfig(){
         return new PollThreadConfig();
+    }
+    @Bean
+    @ConfigurationProperties(prefix = "lsr.ftp",ignoreUnknownFields = true)
+    @ConditionalOnProperty(prefix = "lsr.ftp",name = "enabled",havingValue = "true")
+    public FtpConfig initFtpConfig(){
+        return new FtpConfig();
     }
 }
