@@ -31,11 +31,13 @@ public abstract class AbstractPollThread {
         this.threadId = threadId;
         this.threadName = threadName;
         this.longname = longname;
-        if (timeInterval != null && timeInterval > 0)
+        if (timeInterval != null && timeInterval > 0){
             this.timeInterval = timeInterval;
+        }
 
-        if (delay != null)
+        if (delay != null){
             this.delay = delay;
+        }
         PollThreadManager.get().register(threadName, this);
     }
     /**
@@ -92,8 +94,10 @@ public abstract class AbstractPollThread {
 
     public void shutdown() {
         try {
-            if (this.timer != null)
+            if (this.timer != null){
                 this.timer.cancel();
+            }
+
             this.isTimerStart = false;
         } catch (Exception e) {
             this.isTimerStart = false;

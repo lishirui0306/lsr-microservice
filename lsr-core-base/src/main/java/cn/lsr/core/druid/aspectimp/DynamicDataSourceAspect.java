@@ -1,4 +1,4 @@
-package cn.lsr.core.druid.aspectImp;
+package cn.lsr.core.druid.aspectimp;
 
 import cn.lsr.core.druid.annotation.DS;
 import cn.lsr.core.druid.common.DataSourceType;

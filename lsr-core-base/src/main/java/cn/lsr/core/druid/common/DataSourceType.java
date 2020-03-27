@@ -6,5 +6,8 @@ package cn.lsr.core.druid.common;
  * @author: Hacker_lsr@126.com
  **/
 public enum  DataSourceType {
+    /**
+     * 数据源标识
+     */
     db1,db2
 }
