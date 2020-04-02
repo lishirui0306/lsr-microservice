@@ -17,6 +17,8 @@ public class JobExecute implements Job {
     private Logger logger = LoggerFactory.getLogger(JobExecute.class);
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        //获取参数
+        jobExecutionContext.getJobDetail().getJobDataMap().get("key");
         System.out.println("执行任务===================");
 
     }
