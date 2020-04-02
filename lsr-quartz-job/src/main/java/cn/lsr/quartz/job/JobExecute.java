@@ -19,6 +19,7 @@ public class JobExecute implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         //获取参数
         jobExecutionContext.getJobDetail().getJobDataMap().get("key");
+        //map
         System.out.println("执行任务===================");
 
     }
