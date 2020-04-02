@@ -85,17 +85,13 @@ public class JobTaskServiceImp implements JobTaskService {
             if (checkExists(jobName, jobGroup)) {
                 logger.info("add job fail, job already exist, jobGroup:{}, jobName:{}", jobGroup, jobName);
             }
-
             TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroup);
             JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
-
             CronScheduleBuilder schedBuilder = CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();
             CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(createTime).withSchedule(schedBuilder).build();
-
-
             Class<? extends Job> clazz = (Class<? extends Job>)Class.forName(jobName);
-            //可以传参 TODO
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobKey).withDescription(jobDescription).build();
+            //可以传参 jobDetail.getJobDataMap().put("", "");  TODO
             scheduler.scheduleJob(jobDetail, trigger);
         } catch (SchedulerException | ClassNotFoundException e) {
             logger.error("类名不存在或执行表达式错误,exception:{}",e.getMessage());
@@ -123,7 +119,7 @@ public class JobTaskServiceImp implements JobTaskService {
             CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(createTime).withSchedule(cronScheduleBuilder).build();
 
             JobDetail jobDetail = scheduler.getJobDetail(jobKey);
-            // 参数 TODO
+            //可以传参 jobDetail.getJobDataMap().put("", "");  TODO
             jobDetail.getJobBuilder().withDescription(jobDescription);
             HashSet<Trigger> triggerSet = new HashSet<>();
             triggerSet.add(cronTrigger);
