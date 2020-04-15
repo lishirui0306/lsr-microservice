@@ -11,6 +11,11 @@
     <artifactId>lsr-quartz-job</artifactId>
     <packaging>jar</packaging>
     <dependencies>
+        <!--######################### spring boot web 依赖 #########################-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!--######################### 定义 quartz 版本 #########################-->
         <dependency>
             <groupId>org.quartz-scheduler</groupId>

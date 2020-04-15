@@ -24,21 +24,21 @@ import java.util.List;
 public class JobTaskServiceImp implements JobTaskService {
     private Logger logger = LoggerFactory.getLogger(JobTaskServiceImp.class);
 
-    @Autowired(required=false)
+    @Autowired(required = false)
     private Scheduler scheduler;
 
     /**
      * 所有任务列表
      */
     @Override
-    public List<JobInfo> list(){
+    public List<JobInfo> list() {
         List<JobInfo> list = new ArrayList<>();
 
         try {
-            for(String groupJob: scheduler.getJobGroupNames()){
-                for(JobKey jobKey: scheduler.getJobKeys(GroupMatcher.<JobKey>groupEquals(groupJob))){
+            for (String groupJob : scheduler.getJobGroupNames()) {
+                for (JobKey jobKey : scheduler.getJobKeys(GroupMatcher.<JobKey>groupEquals(groupJob))) {
                     List<? extends Trigger> triggers = scheduler.getTriggersOfJob(jobKey);
-                    for (Trigger trigger: triggers) {
+                    for (Trigger trigger : triggers) {
                         Trigger.TriggerState triggerState = scheduler.getTriggerState(trigger.getKey());
                         JobDetail jobDetail = scheduler.getJobDetail(jobKey);
 
@@ -65,12 +65,12 @@ public class JobTaskServiceImp implements JobTaskService {
         } catch (SchedulerException e) {
             e.printStackTrace();
         }
-
         return list;
     }
 
     /**
      * 保存定时任务
+     *
      * @param info
      */
     @SuppressWarnings("unchecked")
@@ -89,17 +89,19 @@ public class JobTaskServiceImp implements JobTaskService {
             JobKey jobKey = JobKey.jobKey(jobName, jobGroup);
             CronScheduleBuilder schedBuilder = CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();
             CronTrigger trigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(createTime).withSchedule(schedBuilder).build();
-            Class<? extends Job> clazz = (Class<? extends Job>)Class.forName(jobName);
+            Class<? extends Job> clazz = (Class<? extends Job>) Class.forName(jobName);
             JobDetail jobDetail = JobBuilder.newJob(clazz).withIdentity(jobKey).withDescription(jobDescription).build();
-            //可以传参 jobDetail.getJobDataMap().put("", "");  TODO
+            //可以传参   TODO
+            jobDetail.getJobDataMap().put("data", jobDescription);
             scheduler.scheduleJob(jobDetail, trigger);
         } catch (SchedulerException | ClassNotFoundException e) {
-            logger.error("类名不存在或执行表达式错误,exception:{}",e.getMessage());
+            logger.error("类名不存在或执行表达式错误,exception:{}", e.getMessage());
         }
     }
 
     /**
      * 修改定时任务
+     *
      * @param info
      */
     @Override
@@ -117,32 +119,33 @@ public class JobTaskServiceImp implements JobTaskService {
             JobKey jobKey = new JobKey(jobName, jobGroup);
             CronScheduleBuilder cronScheduleBuilder = CronScheduleBuilder.cronSchedule(cronExpression).withMisfireHandlingInstructionDoNothing();
             CronTrigger cronTrigger = TriggerBuilder.newTrigger().withIdentity(triggerKey).withDescription(createTime).withSchedule(cronScheduleBuilder).build();
-
             JobDetail jobDetail = scheduler.getJobDetail(jobKey);
-            //可以传参 jobDetail.getJobDataMap().put("", "");  TODO
+            //可以传参   TODO
+            jobDetail.getJobDataMap().put("data", jobDescription);
             jobDetail.getJobBuilder().withDescription(jobDescription);
             HashSet<Trigger> triggerSet = new HashSet<>();
             triggerSet.add(cronTrigger);
 
             scheduler.scheduleJob(jobDetail, triggerSet, true);
         } catch (SchedulerException e) {
-            logger.error("类名不存在或执行表达式错误,exception:{}",e.getMessage());
+            logger.error("类名不存在或执行表达式错误,exception:{}", e.getMessage());
         }
     }
 
     /**
      * 删除定时任务
+     *
      * @param jobName
      * @param jobGroup
      */
     @Override
-    public void delete(String jobName, String jobGroup){
+    public void delete(String jobName, String jobGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroup);
         try {
             if (checkExists(jobName, jobGroup)) {
                 scheduler.pauseTrigger(triggerKey);
                 scheduler.unscheduleJob(triggerKey);
-                logger.info("delete job, triggerKey:{},jobGroup:{}, jobName:{}", triggerKey ,jobGroup, jobName);
+                logger.info("delete job, triggerKey:{},jobGroup:{}, jobName:{}", triggerKey, jobGroup, jobName);
             }
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
@@ -151,16 +154,17 @@ public class JobTaskServiceImp implements JobTaskService {
 
     /**
      * 暂停定时任务
+     *
      * @param jobName
      * @param jobGroup
      */
     @Override
-    public void pause(String jobName, String jobGroup){
+    public void pause(String jobName, String jobGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroup);
         try {
             if (checkExists(jobName, jobGroup)) {
                 scheduler.pauseTrigger(triggerKey);
-                logger.info("pause job success, triggerKey:{},jobGroup:{}, jobName:{}", triggerKey ,jobGroup, jobName);
+                logger.info("pause job success, triggerKey:{},jobGroup:{}, jobName:{}", triggerKey, jobGroup, jobName);
             }
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
@@ -169,17 +173,18 @@ public class JobTaskServiceImp implements JobTaskService {
 
     /**
      * 重新开始任务
+     *
      * @param jobName
      * @param jobGroup
      */
     @Override
-    public void resume(String jobName, String jobGroup){
+    public void resume(String jobName, String jobGroup) {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroup);
 
         try {
             if (checkExists(jobName, jobGroup)) {
                 scheduler.resumeTrigger(triggerKey);
-                logger.info("resume job success,triggerKey:{},jobGroup:{}, jobName:{}", triggerKey ,jobGroup, jobName);
+                logger.info("resume job success,triggerKey:{},jobGroup:{}, jobName:{}", triggerKey, jobGroup, jobName);
             }
         } catch (SchedulerException e) {
             logger.error(e.getMessage());
@@ -188,12 +193,13 @@ public class JobTaskServiceImp implements JobTaskService {
 
     /**
      * 验证是否存在
+     *
      * @param jobName
      * @param jobGroup
      * @throws SchedulerException
      */
     @Override
-    public boolean checkExists(String jobName, String jobGroup) throws SchedulerException{
+    public boolean checkExists(String jobName, String jobGroup) throws SchedulerException {
         TriggerKey triggerKey = TriggerKey.triggerKey(jobName, jobGroup);
         return scheduler.checkExists(triggerKey);
     }
