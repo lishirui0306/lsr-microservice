@@ -13,9 +13,9 @@ public interface PermissionMapper extends MyMapper<Permission> {
     int deleteByExample(PermissionExample example);
 
     int deleteByPrimaryKey(Long pid);
-
+    @Override
     int insert(Permission record);
-
+    @Override
     int insertSelective(Permission record);
 
     List<Permission> selectByExample(PermissionExample example);
@@ -25,8 +25,8 @@ public interface PermissionMapper extends MyMapper<Permission> {
     int updateByExampleSelective(@Param("record") Permission record, @Param("example") PermissionExample example);
 
     int updateByExample(@Param("record") Permission record, @Param("example") PermissionExample example);
-
+    @Override
     int updateByPrimaryKeySelective(Permission record);
-
+    @Override
     int updateByPrimaryKey(Permission record);
 }

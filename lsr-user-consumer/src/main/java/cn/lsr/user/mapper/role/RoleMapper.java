@@ -13,9 +13,9 @@ public interface RoleMapper extends MyMapper<Role> {
     int deleteByExample(RoleExample example);
 
     int deleteByPrimaryKey(String rid);
-
+    @Override
     int insert(Role record);
-
+    @Override
     int insertSelective(Role record);
 
     List<Role> selectByExample(RoleExample example);
@@ -25,8 +25,8 @@ public interface RoleMapper extends MyMapper<Role> {
     int updateByExampleSelective(@Param("record") Role record, @Param("example") RoleExample example);
 
     int updateByExample(@Param("record") Role record, @Param("example") RoleExample example);
-
+    @Override
     int updateByPrimaryKeySelective(Role record);
-
+    @Override
     int updateByPrimaryKey(Role record);
 }

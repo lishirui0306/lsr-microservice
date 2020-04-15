@@ -25,6 +25,10 @@
             <groupId>cn.lsr</groupId>
             <artifactId>lsr-core-base</artifactId>
         </dependency>
+        <dependency>
+            <groupId>cn.lsr</groupId>
+            <artifactId>lsr-quartz-job</artifactId>
+        </dependency>
         <!--######################### spring boot web 依赖 #########################-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

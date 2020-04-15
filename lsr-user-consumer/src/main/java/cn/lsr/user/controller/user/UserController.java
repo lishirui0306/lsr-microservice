@@ -159,11 +159,13 @@ public class UserController {
             throw new RuntimeException(lock.getMessages());
         }
         RedisResult unlock = redisInterFace.unlock(uid, time);
-        log.info("reids锁释放:{}",unlock.getMessages());
-        return Result.success("操作成功");
+        if (unlock.isB()){
+            return Result.success("操作成功");
+        }
+        return Result.error("操作失败");
     }
     public static void main(String[] args) {
-        Jedis jedis = new Jedis("192.168.0.104",6379);
+        Jedis jedis = new Jedis("127.0.0.1",6379);
         jedis.ping();
         System.out.println(jedis.ping());
     }

@@ -13,7 +13,9 @@ import tk.mybatis.spring.annotation.MapperScan;
  * springboot入口类,此类需要在所有用到的package上层
  * exclude = {DataSourceAutoConfiguration.class}
  * 禁用springboot默认加载的 application-dev.properties/application.yml 单数据源配置
+ * @author
  */
+
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableDiscoveryClient
 public class UserServiceApplication {
