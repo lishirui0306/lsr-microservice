@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -19,6 +20,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Configuration
 public class LSRDBRedisConfig extends LSRBaseRedisConfig {
     private static final Logger log = LoggerFactory.getLogger(LSRDBRedisConfig.class);
+
     /**
      *  初始化 jedis lsrDBRedisProperties 连接工厂 -- lsrDBJedisConnectionFactory
      * @param redisPropertiesConfig
@@ -26,9 +28,20 @@ public class LSRDBRedisConfig extends LSRBaseRedisConfig {
      */
     @Bean(name = "lsrDBJedisConnectionFactory")
     @Override
-    public JedisConnectionFactory buildJedisConnectionFactory(@Qualifier("lsrDBRedisProperties")RedisPropertiesConfig redisPropertiesConfig) {
+    public RedisConnectionFactory redisConnectionFactory(@Qualifier("lsrDBRedisProperties")RedisPropertiesConfig redisPropertiesConfig){
         log.info("lsrDBRedisConfig RedisPropertiesConfig:{}",redisPropertiesConfig);
-        return super.buildJedisConnectionFactory(redisPropertiesConfig);
+        return super.redisConnectionFactory(redisPropertiesConfig);
+    }
+
+    /**
+     * 开启缓存
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean(name = "DbCache")
+    @Override
+    public CacheManager cacheManager(@Qualifier("lsrDBJedisConnectionFactory")RedisConnectionFactory redisConnectionFactory) {
+        return super.cacheManager(redisConnectionFactory);
     }
 
     /**
@@ -41,12 +54,6 @@ public class LSRDBRedisConfig extends LSRBaseRedisConfig {
     public RedisTemplate <Object, Object> buidRedisTemplate(@Qualifier("lsrDBJedisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
         return super.buidRedisTemplate(redisConnectionFactory);
     }
-
-//    @Bean
-//    @Override
-//    public CacheManager cacheManager(@Qualifier("lbsRedisTemplate")RedisTemplate redisTemplate) {
-//        return super.cacheManager(redisTemplate);
-//    }
 
     /**
      * 启动加载配置文件 yml  redis 连接参数

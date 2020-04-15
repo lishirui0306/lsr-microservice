@@ -24,7 +24,6 @@ public class RedisInterFaceImp implements RedisInterFace {
         if (!redisLock.lock(id,value)){
             log.info("获取redis失败 错误！！标识为："+id);
             return RedisResult.error(false,"获得redis锁错误！！！！ 标识为："+id);
-            //throw new RuntimeException("活得锁失败！");
         }
         log.info("获得redis锁成功 标识为："+id);
         return RedisResult.success(true,"获得redis锁成功 标识为："+id);
@@ -32,8 +31,8 @@ public class RedisInterFaceImp implements RedisInterFace {
 
     @Override
     public RedisResult unlock(String id, String value) {
-        log.info("释放redis锁成功 标识为："+id);
         redisLock.unlock(id,value);
+        log.info("释放redis锁成功 标识为："+id);
         return RedisResult.success(true,"释放redis锁成功 标识为："+id);
     }
 }

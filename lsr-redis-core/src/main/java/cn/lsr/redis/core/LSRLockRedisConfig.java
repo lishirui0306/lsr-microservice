@@ -30,9 +30,20 @@ public class LSRLockRedisConfig extends LSRBaseRedisConfig {
     @Primary
     @Bean(name = "lsrLockJedisConnectionFactory")
     @Override
-    public JedisConnectionFactory buildJedisConnectionFactory(@Qualifier("lsrLockRedisConfig")RedisPropertiesConfig redisPropertiesConfig) {
-        log.info("MasterRedisConfig RedisPropertiesConfig:{}",redisPropertiesConfig);
-        return super.buildJedisConnectionFactory(redisPropertiesConfig);
+    public RedisConnectionFactory redisConnectionFactory(@Qualifier("lsrLockRedisConfig")RedisPropertiesConfig redisPropertiesConfig){
+        log.info("MasterRedisConfig(Lock) RedisPropertiesConfig:{}",redisPropertiesConfig);
+        return super.redisConnectionFactory(redisPropertiesConfig);
+    }
+
+    /**
+     * 开启缓存
+     * @param redisConnectionFactory
+     * @return
+     */
+    @Bean(name = "LockCache")
+    @Override
+    public CacheManager cacheManager(@Qualifier("lsrLockJedisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
+        return super.cacheManager(redisConnectionFactory);
     }
 
     /**
@@ -45,12 +56,6 @@ public class LSRLockRedisConfig extends LSRBaseRedisConfig {
     public RedisTemplate<Object, Object> buidRedisTemplate(@Qualifier("lsrLockJedisConnectionFactory") RedisConnectionFactory redisConnectionFactory) {
         return super.buidRedisTemplate(redisConnectionFactory);
     }
-
-//    @Bean
-//    @Override
-//    public CacheManager cacheManager(@Qualifier("lbsRedisTemplate")RedisTemplate redisTemplate) {
-//        return super.cacheManager(redisTemplate);
-//    }
 
     /**
      * 启动加载配置文件 yml  redis 连接参数
