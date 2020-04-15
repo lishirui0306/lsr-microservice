@@ -14,6 +14,7 @@
         <module>lsr-user-consumer</module>
         <module>lsr-core-base</module>
         <module>lsr-batch-processing</module>
+        <module>lsr-quartz-job</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -62,6 +63,13 @@
                 <artifactId>lsr-batch-processing</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-quartz-job</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
