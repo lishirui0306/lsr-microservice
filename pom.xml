@@ -11,10 +11,10 @@
         <module>lsr-dependencies-bom</module>
         <module>lsr-common</module>
         <module>lsr-redis-core</module>
-        <module>lsr-user-consumer</module>
         <module>lsr-core-base</module>
         <module>lsr-batch-processing</module>
         <module>lsr-quartz-job</module>
+        <module>lsr-flow</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -48,12 +48,6 @@
 
             <dependency>
                 <groupId>cn.lsr</groupId>
-                <artifactId>lsr-user-consumer</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>cn.lsr</groupId>
                 <artifactId>lsr-core-base</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -70,6 +64,11 @@
                 <version>${project.version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>cn.lsr</groupId>
+                <artifactId>lsr-flow</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
