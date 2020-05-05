@@ -1,0 +1,15 @@
+spring:
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        instance-id: batch
+        # 对外暴露的服务名称
+        service-name: lsr-batch-processing
+        prefer-ip-address: true
+      config:
+        prefix: config
+        enabled: true
+        format: YAML
+        data-key: user
