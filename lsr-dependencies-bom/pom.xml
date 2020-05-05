@@ -29,7 +29,10 @@
         <fastjson.version>1.2.47</fastjson.version>
         <jackson-databind.version>2.9.8</jackson-databind.version>
         <lang3.version>3.1</lang3.version>
+        <orika.version>1.5.4</orika.version>
         <quartz.version>2.2.3</quartz.version>
+        <aspectjweaver.version>1.9.2</aspectjweaver.version>
+        <io.version>2.4</io.version>
     </properties>
 
     <dependencyManagement>
@@ -50,12 +53,29 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!--######################### 定义 spring starter 版本 #########################-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
             <!--######################### 定义 spring context 版本 #########################-->
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
             <!--######################### 定义 spring batch 版本 #########################-->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -80,6 +100,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
                 <version>${spring-boot.version}</version>
+            </dependency>
+            <!--######################### 定义 spring的切入点表达式 版本 #########################-->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjweaver</artifactId>
+                <version>${aspectjweaver.version}</version>
             </dependency>
             <!--######################### 定义 cache 版本 #########################-->
             <dependency>
@@ -251,6 +277,18 @@
                 <groupId>org.quartz-scheduler</groupId>
                 <artifactId>quartz-jobs</artifactId>
                 <version>${quartz.version}</version>
+            </dependency>
+            <!--######################### 定义 数据映射 版本 #########################-->
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika.version}</version>
+            </dependency>
+            <!--######################### 定义 io 版本 #########################-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${io.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
