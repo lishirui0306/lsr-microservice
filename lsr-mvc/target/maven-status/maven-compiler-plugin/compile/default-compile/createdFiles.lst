@@ -1,0 +1,12 @@
+cn/lsr/mvc/dao/TestDao.class
+cn/lsr/mvc/annotation/LSRController.class
+cn/lsr/mvc/annotation/LSRRepository.class
+cn/lsr/mvc/annotation/LSRQualifier.class
+cn/lsr/mvc/RPCApplication.class
+cn/lsr/mvc/annotation/LSRRequestMapping.class
+cn/lsr/mvc/service/TestServiceImp.class
+cn/lsr/mvc/servlet/DispatcherServlet.class
+cn/lsr/mvc/controller/TestController.class
+cn/lsr/mvc/annotation/LSRService.class
+cn/lsr/mvc/service/TestService.class
+cn/lsr/mvc/dao/TestDaoImp.class

@@ -1,0 +1,12 @@
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/annotation/LSRService.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/controller/TestController.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/dao/TestDao.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/RPCApplication.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/annotation/LSRQualifier.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/annotation/LSRRepository.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/annotation/LSRController.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/service/TestServiceImp.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/servlet/DispatcherServlet.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/annotation/LSRRequestMapping.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/dao/TestDaoImp.java
+/Users/lsr/GitProjects/lsr-microservice/lsr-mvc/src/main/java/cn/lsr/mvc/service/TestService.java
