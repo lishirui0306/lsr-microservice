@@ -33,6 +33,7 @@
         <quartz.version>2.2.3</quartz.version>
         <aspectjweaver.version>1.9.2</aspectjweaver.version>
         <io.version>2.4</io.version>
+        <netty.version>4.1.42.Final</netty.version>
     </properties>
 
     <dependencyManagement>
@@ -57,6 +58,13 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter</artifactId>
+                <!-- 排除默认的logback日志，使用log4j-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.springframework.boot</groupId>
+                        <artifactId>spring-boot-starter-logging</artifactId>
+                    </exclusion>
+                </exclusions>
                 <version>${spring-boot.version}</version>
             </dependency>
             <!--######################### 定义 spring context 版本 #########################-->
@@ -289,6 +297,12 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>${io.version}</version>
+            </dependency>
+            <!--######################### 定义 netty 版本 #########################-->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-all</artifactId>
+                <version>${netty.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
